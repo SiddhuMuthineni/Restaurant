@@ -1,0 +1,85 @@
+/* LOGIN PAGE STYLES */
+.login-body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--deep-black);
+}
+
+.login-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+  background: radial-gradient(circle at center, #2a0805 0%, var(--deep-black) 70%);
+}
+
+.floating-icon {
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(241, 196, 15, 0.2);
+  animation: float 10s infinite linear;
+  z-index: 2;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+.login-container {
+  position: relative;
+  z-index: 10;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: var(--shadow-glow);
+  text-align: center;
+}
+
+.login-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.login-title span { color: var(--rich-red); }
+
+.login-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.login-form input {
+  padding-right: 40px; /* For the valid checkmark */
+}
+
+/* Auth toggle link */
+.auth-switch {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.auth-switch a {
+  color: var(--warm-gold);
+  font-weight: 600;
+}
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+.btn-login {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1rem;
+}

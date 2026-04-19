@@ -1,0 +1,128 @@
+/* GLOBAL ANIMATIONS */
+
+/* Page Fade In */
+.page-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button Ripple Placeholder (JS handles coordinate logic ideally, but we can do a generic one) */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-effect 0.6s linear;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+@keyframes ripple-effect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Food Card Hover Effect */
+.food-card {
+  transition: all 0.4s ease;
+  position: relative;
+}
+.food-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-glow);
+}
+.food-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.food-img-wrap img {
+  transition: transform 0.6s ease;
+}
+.food-card:hover .food-img-wrap img {
+  transform: scale(1.1);
+}
+
+/* Steam/Smoke Animation */
+.steam {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  filter: blur(8px);
+  opacity: 0;
+  top: 40%;
+  left: 50%;
+}
+.steam:nth-child(1) { animation: smoking 3s infinite 0s linear; left: 40%; }
+.steam:nth-child(2) { animation: smoking 3s infinite 1s linear; left: 50%; }
+.steam:nth-child(3) { animation: smoking 3s infinite 2s linear; left: 60%; }
+
+@keyframes smoking {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(-40px) scale(3); opacity: 0; }
+}
+
+/* Typewriter / Split Text Hero entrance handled via AOS / CSS */
+.hero-title span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 0.5s forwards ease-out;
+}
+@keyframes textReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Category Tab Slide Underline */
+.category-tabs {
+  position: relative;
+}
+.tab-btn {
+  position: relative;
+}
+.tab-btn::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--warm-gold);
+  transition: width 0.3s ease;
+}
+.tab-btn.active::after, .tab-btn:hover::after {
+  width: 100%;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+  background-size: 200% 100%;
+  animation: skeletonLoading 1.5s infinite;
+}
+@keyframes skeletonLoading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
