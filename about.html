@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Savor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    .about-header {
+      padding: 140px 0 60px;
+      text-align: center;
+      background: linear-gradient(rgba(13,13,13,0.8), rgba(13,13,13,0.9)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920') center/cover;
+    }
+
+    .story-section { padding: 80px 0; }
+    .story-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .story-text h2 { margin-bottom: 20px; font-size: 2.5rem; }
+    .story-text p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px; text-align: justify; }
+
+    .story-img-col { position: relative; }
+    .img-1, .img-2 { border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .img-1 img { width: 100%; display: block; }
+    .img-2 { position: absolute; bottom: -40px; right: -20px; width: 60%; border: 5px solid var(--deep-black); }
+    .img-2 img { width: 100%; display: block; }
+
+    .features-section {
+      background: #111; padding: 80px 0;
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 40px;
+    }
+    .feat-card {
+      text-align: center; padding: 30px 20px; background: var(--dark-grey); border-radius: 8px; transition: transform 0.3s;
+    }
+    .feat-card:hover { transform: translateY(-10px); background: var(--rich-red); }
+    .feat-card i { font-size: 3rem; color: var(--warm-gold); margin-bottom: 20px; }
+    .feat-card h4 { color: var(--cream); margin-bottom: 10px; }
+    .feat-card p { color: var(--text-muted); font-size: 0.9rem; }
+    .feat-card:hover i, .feat-card:hover p { color: var(--cream); }
+
+    .team-section { padding: 80px 0; text-align: center; }
+    .chef-wrap {
+      max-width: 800px; margin: 40px auto 0;
+      background: var(--dark-grey); border-radius: 12px; padding: 40px;
+    }
+    .chef-img {
+      width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; border: 4px solid var(--warm-gold);
+    }
+    .chef-img img { width: 100%; height: 100%; object-fit: cover; }
+    
+    @media(max-width: 992px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .img-2 { position: relative; bottom: 0; right: 0; width: 100%; border: none; margin-top: 20px;}
+    }
+  </style>
+</head>
+<body class="page-fade-in">
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Savor<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html" style="color:var(--warm-gold);">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+        </a>
+        <div class="user-menu">
+          <div class="avatar" id="user-avatar-name">U</div>
+          <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="about-header">
+    <div class="container">
+      <h1 class="section-title">Our Story</h1>
+      <p style="color:var(--cream);font-size:1.2rem;">Passion, Tradition, and Culinary Excellence.</p>
+    </div>
+  </header>
+
+  <section class="story-section container" data-aos="fade-up">
+    <div class="story-grid">
+      <div class="story-text">
+        <h2>A Legacy of Flavors</h2>
+        <p>Founded in 2010, Savor began as a humble family dream to bring authentic, soul-warming Indian cuisine to the heart of the city. We believe that dining isn't just about food; it's an immersive experience that brings people together.</p>
+        <p>Over the years, our dedication to sourcing the finest organic ingredients and maintaining age-old family recipes has established Savor as a staple gem. Our menu is carefully curated, balancing classic tradition with a touch of modern gastronomy.</p>
+        <p>At Savor, every spice is ground fresh daily, and every dish is prepared with the kind of love and attention you'd only find in a home kitchen. Welcome to our table.</p>
+      </div>
+      <div class="story-img-col">
+        <div class="img-1">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600" alt="Restaurant Interior">
+        </div>
+        <div class="img-2">
+          <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=400" alt="Grilling">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title text-center" data-aos="fade-up">Why Choose Us</h2>
+      <div class="features-grid" data-aos="fade-up" data-aos-delay="200">
+        <div class="feat-card">
+          <i class="fas fa-leaf"></i>
+          <h4>Fresh Ingredients</h4>
+          <p>We source local, organic produce daily to ensure maximum flavor and quality.</p>
+        </div>
+        <div class="feat-card">
+          <i class="fas fa-fire-burner"></i>
+          <h4>Expert Chefs</h4>
+          <p>Our kitchen is lead by world-class culinary masters with decades of experience.</p>
+        </div>
+        <div class="feat-card">
+          <i class="fas fa-motorcycle"></i>
+          <h4>Fast Delivery</h4>
+          <p>Hot, fresh food delivered rapidly straight to your doorstep.</p>
+        </div>
+        <div class="feat-card">
+          <i class="fas fa-tags"></i>
+          <h4>Best Prices</h4>
+          <p>Premium dining experiences accessible without premium markups.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section container" data-aos="fade-up">
+    <h2 class="section-title">Meet The Mastermind</h2>
+    <div class="chef-wrap">
+      <div class="chef-img">
+        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=400" alt="Master Chef">
+      </div>
+      <h3 style="color:var(--warm-gold); font-size:2rem;">Chef Arjun Kapoor</h3>
+      <p style="color:var(--rich-red); font-weight:bold; margin-bottom: 20px;">Executive Head Chef</p>
+      <p style="color:var(--text-muted); text-align: justify;">With over 20 years of experience across luxury hotels and Michelin-starred kitchens in Europe and Asia, Chef Arjun Kapoor returned to his roots to create Savor. His philosophy is simple: let the ingredients speak. By combining his deep knowledge of French culinary techniques with the robust, complex spices of his heritage, he elevates classic Indian cuisine into a modern art form.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container text-center text-muted">
+      <p>&copy; 2026 Savor Restaurant.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

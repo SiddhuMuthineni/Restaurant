@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations - Savor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    .res-header {
+      padding: 140px 0 60px;
+      text-align: center;
+      background: linear-gradient(rgba(13,13,13,0.8), rgba(13,13,13,0.9)), url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1920') center/cover;
+    }
+
+    .res-container {
+      max-width: 1000px;
+      margin: -40px auto 100px;
+      position: relative;
+      z-index: 10;
+      background: var(--dark-grey);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    .res-info {
+      flex: 1;
+      min-width: 300px;
+      background: #111;
+      padding: 50px 40px;
+      color: var(--text-muted);
+    }
+    .res-info h3 { color: var(--cream); margin-bottom: 20px; font-size: 2rem; }
+    .res-info p { margin-bottom: 30px; }
+    
+    .op-hours { margin-bottom: 30px; }
+    .op-hours div { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px; }
+
+    .res-form-sec {
+      flex: 2;
+      min-width: 400px;
+      padding: 50px 40px;
+      position: relative;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    
+    .form-control[type="date"], .form-control[type="time"], select.form-control {
+      cursor: pointer;
+    }
+
+    .form-control:invalid {
+      border-color: #333; /* default */
+    }
+    
+    /* Success Card Overlay */
+    .success-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--dark-grey);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 20;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .success-overlay i { font-size: 4rem; color: #2ed573; margin-bottom: 20px; animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    
+    @keyframes scaleUp { from{transform:scale(0);} to{transform:scale(1);} }
+
+    @media(max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .res-container { margin: 20px; }
+    }
+  </style>
+</head>
+<body class="page-fade-in">
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Savor<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="reservations.html" style="color:var(--warm-gold);">Reservations</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+        </a>
+        <div class="user-menu">
+          <div class="avatar" id="user-avatar-name">U</div>
+          <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="res-header">
+    <div class="container">
+      <h1 class="section-title">Book a Table</h1>
+    </div>
+  </header>
+
+  <div class="res-container" data-aos="fade-up">
+    <!-- Info Side -->
+    <div class="res-info">
+      <h3>Dine With Us</h3>
+      <p>Reserve your spot to enjoy a curated dining experience. We recommended booking at least a day in advance for weekends.</p>
+      
+      <div class="op-hours">
+        <h4 style="color:var(--warm-gold);">Opening Hours</h4>
+        <div><span>Mon - Thu</span><span>12:00 PM - 10:00 PM</span></div>
+        <div><span>Fri - Sun</span><span>12:00 PM - 11:30 PM</span></div>
+      </div>
+
+      <div style="margin-top: 40px; text-align: center;">
+        <i class="fas fa-wine-glass" style="font-size: 3rem; color: #333;"></i>
+      </div>
+    </div>
+
+    <!-- Form Side -->
+    <div class="res-form-sec">
+      <h3 style="color: var(--cream); margin-bottom: 25px; font-size:1.5rem;">Reservation Details</h3>
+      
+      <form id="res-form">
+        <div class="grid-2">
+          <div class="form-group">
+            <input type="text" id="res-name" class="form-control" placeholder="Full Name" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" id="res-phone" class="form-control" placeholder="Phone Number" required pattern="[0-9]{10}">
+          </div>
+        </div>
+        
+        <div class="grid-2">
+          <div class="form-group">
+            <input type="date" id="res-date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <select id="res-time" class="form-control" required>
+              <option value="" disabled selected>Select Time</option>
+              <!-- Populated by JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select id="res-guests" class="form-control" required>
+            <option value="" disabled selected>Number of Guests</option>
+            <option value="1">1 Person</option>
+            <option value="2">2 People</option>
+            <option value="3">3 People</option>
+            <option value="4">4 People</option>
+            <option value="5">5 People</option>
+            <option value="6">6 People</option>
+            <option value="large">7+ People (Contact directly)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <textarea id="res-req" class="form-control" placeholder="Special Requests (e.g. Birthday, Anniversary)? (Optional)" style="min-height:100px; resize:vertical;"></textarea>
+        </div>
+
+        <button type="submit" id="res-btn" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">Book Table</button>
+      </form>
+
+      <!-- Success Overlay -->
+      <div id="res-success" class="success-overlay">
+        <i class="fas fa-check-circle"></i>
+        <h2 style="color:var(--cream); margin-bottom:10px;">Booking Confirmed!</h2>
+        <p style="color:var(--text-muted); margin-bottom: 20px;">We've sent a confirmation to your email. We look forward to hosting you on <strong id="succ-date" style="color:var(--warm-gold);"></strong> at <strong id="succ-time" style="color:var(--warm-gold);"></strong>.</p>
+        <button class="btn btn-secondary" onclick="window.location.reload()">Book Another Table</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container text-center text-muted">
+      <p>&copy; 2026 Savor Restaurant.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set min date to today
+      const dateInput = document.getElementById('res-date');
+      const today = new Date();
+      const yr = today.getFullYear();
+      const mo = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      dateInput.min = `${yr}-${mo}-${day}`;
+
+      // Populate Time Slots (12PM to 10PM, 30min intervals)
+      const timeSelect = document.getElementById('res-time');
+      let t = new Date();
+      t.setHours(12, 0, 0, 0); // start
+      const end = new Date();
+      end.setHours(22, 0, 0, 0); // end
+      
+      while(t <= end) {
+        let hrs = t.getHours();
+        let mins = String(t.getMinutes()).padStart(2, '0');
+        let ampm = hrs >= 12 ? 'PM' : 'AM';
+        let displayHrs = hrs % 12 || 12;
+        let timeStr = `${displayHrs}:${mins} ${ampm}`;
+        
+        let opt = document.createElement('option');
+        opt.value = timeStr;
+        opt.innerText = timeStr;
+        timeSelect.appendChild(opt);
+
+        // add 30 mins
+        t.setMinutes(t.getMinutes() + 30);
+      }
+
+      // Handle Submit
+      const form = document.getElementById('res-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get details
+        const rDate = dateInput.value;
+        const rTime = timeSelect.value;
+        const rName = document.getElementById('res-name').value;
+        
+        if(!rDate || !rTime || !rName) return;
+
+        const btn = document.getElementById('res-btn');
+        btn.innerHTML = '<div class="spinner"></div> Booking...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+          document.getElementById('succ-date').innerText = rDate;
+          document.getElementById('succ-time').innerText = rTime;
+          document.getElementById('res-success').style.display = 'flex';
+        }, 1500);
+
+      });
+    });
+  </script>
+</body>
+</html>

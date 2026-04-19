@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Restaurant</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/login.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body page-fade-in">
+
+  <div class="login-bg"></div>
+
+  <div class="login-container">
+    <h1 class="logo login-title">Savor<span>.</span></h1>
+    
+    <!-- Login Form -->
+    <div id="login-form-wrap">
+      <p class="login-subtitle">Welcome back! Please login to your account.</p>
+      
+      <form id="login-form" class="login-form">
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Email Address" required>
+          <i class="fas fa-check-circle valid-icon"></i>
+          <div class="error-msg" id="login-form-email-error">Must be a valid Gmail (e.g. user@gmail.com).</div>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" required>
+          <i class="fas fa-check-circle valid-icon"></i>
+          <div class="error-msg" id="login-form-password-error">Min 8 chars, 1 uppercase, 1 number.</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-login">Sign In</button>
+      </form>
+      
+      <div class="auth-switch">
+        Don't have an account? <a href="#" id="show-register">Register</a>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="register-form-wrap" style="display: none;">
+      <p class="login-subtitle">Create an account to order & reserve.</p>
+      
+      <form id="register-form" class="login-form">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Email Address" required>
+          <i class="fas fa-check-circle valid-icon"></i>
+          <div class="error-msg" id="register-form-email-error">Must be a valid Gmail.</div>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" required>
+          <i class="fas fa-check-circle valid-icon"></i>
+          <div class="error-msg" id="register-form-password-error">Min 8 chars, 1 uppercase, 1 number.</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-login">Sign Up</button>
+      </form>
+      
+      <div class="auth-switch">
+        Already have an account? <a href="#" id="show-login">Login</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

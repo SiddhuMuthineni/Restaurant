@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu - Savor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <style>
+    /* MENU SPECIFIC STYLES */
+    .menu-header {
+      padding: 120px 0 40px;
+      text-align: center;
+      background: linear-gradient(rgba(13,13,13,0.9), rgba(13,13,13,0.9)), url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1920') center/cover;
+    }
+    .menu-title { font-size: 3rem; margin-bottom: 20px; }
+    
+    .menu-controls {
+      background: var(--dark-grey);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: -30px;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+    
+    .search-bar {
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: 1px solid #333;
+      background: #111;
+      color: var(--cream);
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .filter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+      scrollbar-width: none;
+    }
+    .category-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      cursor: pointer;
+      white-space: nowrap;
+      padding: 5px 10px;
+    }
+    .tab-btn.active { color: var(--warm-gold); font-weight: bold; }
+
+    .controls-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    /* Toggle Switch */
+    .veg-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #333;
+      transition: .4s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #2ed573; }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    select.sort-select {
+      background: #111;
+      color: var(--cream);
+      border: 1px solid #333;
+      padding: 8px 15px;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    /* MENU GRID */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 50px 0;
+    }
+
+    .menu-item-card {
+      background: var(--dark-grey);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+    .menu-item-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-glow);
+    }
+    
+    .item-img {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    .item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .menu-item-card:hover .item-img img { transform: scale(1.1); }
+    
+    .item-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--warm-gold);
+      color: var(--deep-black);
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      border-radius: 20px;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    .item-details { padding: 20px; flex-grow: 1; display: flex; flex-direction: column;}
+    .item-title { font-size: 1.3rem; margin-bottom: 5px; }
+    .item-title a { color: var(--cream); }
+    .item-title a:hover { color: var(--warm-gold); }
+    .item-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1;}
+    
+    .item-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .item-rating { color: var(--warm-gold); font-size: 0.9rem; }
+    .item-price { font-size: 1.4rem; font-weight: bold; color: var(--cream); }
+    
+    .add-to-cart { width: 100%; }
+
+    /* Skeleton Loading Template */
+    .skeleton-card .item-img, .skeleton-card .item-title, .skeleton-card .item-desc, .skeleton-card .btn {
+      background: #333;
+      border: none;
+    }
+    
+  </style>
+</head>
+<body class="page-fade-in">
+
+  <!-- NAVBAR (Same structure, will be handled globally) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Savor<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html" style="color:var(--warm-gold);">Menu</a></li>
+        <li><a href="reservations.html">Reservations</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
+        </a>
+        <div class="user-menu">
+          <div class="avatar" id="user-avatar-name">U</div>
+          <button id="logout-btn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="menu-header">
+    <div class="container">
+      <h1 class="menu-title">Our Menu</h1>
+      <p style="color:var(--cream);font-size:1.2rem;">Discover our wide selection of exquisite dishes.</p>
+    </div>
+  </header>
+
+  <!-- CONTROLS -->
+  <div class="container">
+    <div class="menu-controls" data-aos="fade-up">
+      <input type="text" id="searchBar" class="search-bar" placeholder="Search for a dish...">
+      
+      <div class="filter-row">
+        <div class="category-tabs" id="categoryTabs">
+          <button class="tab-btn active" data-filter="All">All</button>
+          <button class="tab-btn" data-filter="Starters">Starters</button>
+          <button class="tab-btn" data-filter="Main Course">Main Course</button>
+          <button class="tab-btn" data-filter="Biryani">Biryani</button>
+          <button class="tab-btn" data-filter="Breads">Breads</button>
+          <button class="tab-btn" data-filter="Desserts">Desserts</button>
+          <button class="tab-btn" data-filter="Beverages">Beverages</button>
+          <button class="tab-btn" data-filter="Pizza">Pizza</button>
+          <button class="tab-btn" data-filter="Pasta">Pasta</button>
+        </div>
+
+        <div class="controls-right">
+          <label class="veg-toggle">
+            <span style="font-size: 0.9rem; color:var(--text-muted)"><span class="veg-dot"></span> Veg Only</span>
+            <span class="switch">
+              <input type="checkbox" id="vegToggle">
+              <span class="slider"></span>
+            </span>
+          </label>
+          
+          <select class="sort-select" id="sortSelect">
+            <option value="popular">Sort Format: Popular</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU LISTING -->
+  <main class="container">
+    <div class="menu-grid" id="menuGrid">
+      <!-- Generated via JS -->
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container text-center text-muted">
+      <p>&copy; 2026 Savor Restaurant.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/menu.js?v=2"></script>
+</body>
+</html>
